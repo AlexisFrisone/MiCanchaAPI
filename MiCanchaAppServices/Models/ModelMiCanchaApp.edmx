@@ -1,0 +1,360 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MiCanchaAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CANCHA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="COMPLEJO" Type="int" />
+        </EntityType>
+        <EntityType Name="COMPLEJO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="DUEÑO" Type="int" />
+        </EntityType>
+        <EntityType Name="TIPO_USUARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TIPO_USUARIO" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TURNOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CANCHA_ID" Type="int" />
+          <Property Name="USUARIO" Type="int" />
+          <Property Name="FECHA" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="APELLIDO" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PASS" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="TIPO_USUARIO" Type="int" />
+        </EntityType>
+        <Association Name="FK__CANCHA__COMPLEJO__3F466844">
+          <End Role="COMPLEJO" Type="Self.COMPLEJO" Multiplicity="0..1" />
+          <End Role="CANCHA" Type="Self.CANCHA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPLEJO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CANCHA">
+              <PropertyRef Name="COMPLEJO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPLEJO__DUEÑO__3C69FB99">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="COMPLEJO" Type="Self.COMPLEJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="COMPLEJO">
+              <PropertyRef Name="DUEÑO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TURNOS__CANCHA_I__4222D4EF">
+          <End Role="CANCHA" Type="Self.CANCHA" Multiplicity="0..1" />
+          <End Role="TURNOS" Type="Self.TURNOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CANCHA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TURNOS">
+              <PropertyRef Name="CANCHA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TURNOS__USUARIO__4316F928">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="TURNOS" Type="Self.TURNOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TURNOS">
+              <PropertyRef Name="USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__TIPO_US__398D8EEE">
+          <End Role="TIPO_USUARIO" Type="Self.TIPO_USUARIO" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="TIPO_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MiCanchaAppModelStoreContainer">
+          <EntitySet Name="CANCHA" EntityType="Self.CANCHA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COMPLEJO" EntityType="Self.COMPLEJO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TIPO_USUARIO" EntityType="Self.TIPO_USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TURNOS" EntityType="Self.TURNOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CANCHA__COMPLEJO__3F466844" Association="Self.FK__CANCHA__COMPLEJO__3F466844">
+            <End Role="COMPLEJO" EntitySet="COMPLEJO" />
+            <End Role="CANCHA" EntitySet="CANCHA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPLEJO__DUEÑO__3C69FB99" Association="Self.FK__COMPLEJO__DUEÑO__3C69FB99">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="COMPLEJO" EntitySet="COMPLEJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TURNOS__CANCHA_I__4222D4EF" Association="Self.FK__TURNOS__CANCHA_I__4222D4EF">
+            <End Role="CANCHA" EntitySet="CANCHA" />
+            <End Role="TURNOS" EntitySet="TURNOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TURNOS__USUARIO__4316F928" Association="Self.FK__TURNOS__USUARIO__4316F928">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="TURNOS" EntitySet="TURNOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__TIPO_US__398D8EEE" Association="Self.FK__USUARIO__TIPO_US__398D8EEE">
+            <End Role="TIPO_USUARIO" EntitySet="TIPO_USUARIO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MiCanchaAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CANCHA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="COMPLEJO" Type="Int32" />
+          <NavigationProperty Name="COMPLEJO1" Relationship="Self.FK__CANCHA__COMPLEJO__3F466844" FromRole="CANCHA" ToRole="COMPLEJO" />
+          <NavigationProperty Name="TURNOS" Relationship="Self.FK__TURNOS__CANCHA_I__4222D4EF" FromRole="CANCHA" ToRole="TURNOS" />
+        </EntityType>
+        <EntityType Name="COMPLEJO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DUEÑO" Type="Int32" />
+          <NavigationProperty Name="CANCHA" Relationship="Self.FK__CANCHA__COMPLEJO__3F466844" FromRole="COMPLEJO" ToRole="CANCHA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK__COMPLEJO__DUEÑO__3C69FB99" FromRole="COMPLEJO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="TIPO_USUARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TIPO_USUARIO1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK__USUARIO__TIPO_US__398D8EEE" FromRole="TIPO_USUARIO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="TURNOS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CANCHA_ID" Type="Int32" />
+          <Property Name="USUARIO" Type="Int32" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="CANCHA" Relationship="Self.FK__TURNOS__CANCHA_I__4222D4EF" FromRole="TURNOS" ToRole="CANCHA" />
+          <NavigationProperty Name="USUARIO1" Relationship="Self.FK__TURNOS__USUARIO__4316F928" FromRole="TURNOS" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TIPO_USUARIO" Type="Int32" />
+          <NavigationProperty Name="COMPLEJO" Relationship="Self.FK__COMPLEJO__DUEÑO__3C69FB99" FromRole="USUARIO" ToRole="COMPLEJO" />
+          <NavigationProperty Name="TIPO_USUARIO1" Relationship="Self.FK__USUARIO__TIPO_US__398D8EEE" FromRole="USUARIO" ToRole="TIPO_USUARIO" />
+          <NavigationProperty Name="TURNOS" Relationship="Self.FK__TURNOS__USUARIO__4316F928" FromRole="USUARIO" ToRole="TURNOS" />
+        </EntityType>
+        <Association Name="FK__CANCHA__COMPLEJO__3F466844">
+          <End Role="COMPLEJO" Type="Self.COMPLEJO" Multiplicity="0..1" />
+          <End Role="CANCHA" Type="Self.CANCHA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="COMPLEJO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CANCHA">
+              <PropertyRef Name="COMPLEJO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TURNOS__CANCHA_I__4222D4EF">
+          <End Role="CANCHA" Type="Self.CANCHA" Multiplicity="0..1" />
+          <End Role="TURNOS" Type="Self.TURNOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CANCHA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TURNOS">
+              <PropertyRef Name="CANCHA_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__COMPLEJO__DUEÑO__3C69FB99">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="COMPLEJO" Type="Self.COMPLEJO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="COMPLEJO">
+              <PropertyRef Name="DUEÑO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__TIPO_US__398D8EEE">
+          <End Role="TIPO_USUARIO" Type="Self.TIPO_USUARIO" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TIPO_USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="TIPO_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TURNOS__USUARIO__4316F928">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
+          <End Role="TURNOS" Type="Self.TURNOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TURNOS">
+              <PropertyRef Name="USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MiCanchaDBContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CANCHA" EntityType="Self.CANCHA" />
+          <EntitySet Name="COMPLEJO" EntityType="Self.COMPLEJO" />
+          <EntitySet Name="TIPO_USUARIO" EntityType="Self.TIPO_USUARIO" />
+          <EntitySet Name="TURNOS" EntityType="Self.TURNOS" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <AssociationSet Name="FK__CANCHA__COMPLEJO__3F466844" Association="Self.FK__CANCHA__COMPLEJO__3F466844">
+            <End Role="COMPLEJO" EntitySet="COMPLEJO" />
+            <End Role="CANCHA" EntitySet="CANCHA" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TURNOS__CANCHA_I__4222D4EF" Association="Self.FK__TURNOS__CANCHA_I__4222D4EF">
+            <End Role="CANCHA" EntitySet="CANCHA" />
+            <End Role="TURNOS" EntitySet="TURNOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__COMPLEJO__DUEÑO__3C69FB99" Association="Self.FK__COMPLEJO__DUEÑO__3C69FB99">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="COMPLEJO" EntitySet="COMPLEJO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__TIPO_US__398D8EEE" Association="Self.FK__USUARIO__TIPO_US__398D8EEE">
+            <End Role="TIPO_USUARIO" EntitySet="TIPO_USUARIO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TURNOS__USUARIO__4316F928" Association="Self.FK__TURNOS__USUARIO__4316F928">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="TURNOS" EntitySet="TURNOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MiCanchaAppModelStoreContainer" CdmEntityContainer="MiCanchaDBContext">
+          <EntitySetMapping Name="CANCHA">
+            <EntityTypeMapping TypeName="MiCanchaAppModel.CANCHA">
+              <MappingFragment StoreEntitySet="CANCHA">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="COMPLEJO" ColumnName="COMPLEJO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COMPLEJO">
+            <EntityTypeMapping TypeName="MiCanchaAppModel.COMPLEJO">
+              <MappingFragment StoreEntitySet="COMPLEJO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="DUEÑO" ColumnName="DUEÑO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TIPO_USUARIO">
+            <EntityTypeMapping TypeName="MiCanchaAppModel.TIPO_USUARIO">
+              <MappingFragment StoreEntitySet="TIPO_USUARIO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TIPO_USUARIO1" ColumnName="TIPO_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TURNOS">
+            <EntityTypeMapping TypeName="MiCanchaAppModel.TURNOS">
+              <MappingFragment StoreEntitySet="TURNOS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="CANCHA_ID" ColumnName="CANCHA_ID" />
+                <ScalarProperty Name="USUARIO" ColumnName="USUARIO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="MiCanchaAppModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="PASS" ColumnName="PASS" />
+                <ScalarProperty Name="TIPO_USUARIO" ColumnName="TIPO_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
