@@ -172,25 +172,25 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CANCHA.cs">
-      <DependentUpon>ModelMiCanchaApp.tt</DependentUpon>
+      <DependentUpon>MiCanchaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\COMPLEJO.cs">
-      <DependentUpon>ModelMiCanchaApp.tt</DependentUpon>
+      <DependentUpon>MiCanchaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelMiCanchaApp.Context.cs">
+    <Compile Include="Models\MiCanchaModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelMiCanchaApp.Context.tt</DependentUpon>
+      <DependentUpon>MiCanchaModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelMiCanchaApp.cs">
+    <Compile Include="Models\MiCanchaModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelMiCanchaApp.tt</DependentUpon>
+      <DependentUpon>MiCanchaModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelMiCanchaApp.Designer.cs">
+    <Compile Include="Models\MiCanchaModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelMiCanchaApp.edmx</DependentUpon>
+      <DependentUpon>MiCanchaModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Request\CanchaRequest.cs" />
     <Compile Include="Models\Request\ComplejoRequest.cs" />
@@ -198,13 +198,13 @@
     <Compile Include="Models\Request\TurnoRequest.cs" />
     <Compile Include="Models\Request\UsuarioRequest.cs" />
     <Compile Include="Models\TIPO_USUARIO.cs">
-      <DependentUpon>ModelMiCanchaApp.tt</DependentUpon>
+      <DependentUpon>MiCanchaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TURNOS.cs">
-      <DependentUpon>ModelMiCanchaApp.tt</DependentUpon>
+      <DependentUpon>MiCanchaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\USUARIO.cs">
-      <DependentUpon>ModelMiCanchaApp.tt</DependentUpon>
+      <DependentUpon>MiCanchaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -217,15 +217,15 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\ModelMiCanchaApp.Context.tt">
+    <Content Include="Models\MiCanchaModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelMiCanchaApp.edmx</DependentUpon>
-      <LastGenOutput>ModelMiCanchaApp.Context.cs</LastGenOutput>
+      <DependentUpon>MiCanchaModel.edmx</DependentUpon>
+      <LastGenOutput>MiCanchaModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ModelMiCanchaApp.tt">
+    <Content Include="Models\MiCanchaModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelMiCanchaApp.edmx</DependentUpon>
-      <LastGenOutput>ModelMiCanchaApp.cs</LastGenOutput>
+      <DependentUpon>MiCanchaModel.edmx</DependentUpon>
+      <LastGenOutput>MiCanchaModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -248,12 +248,12 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <EntityDeploy Include="Models\ModelMiCanchaApp.edmx">
+    <EntityDeploy Include="Models\MiCanchaModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelMiCanchaApp.Designer.cs</LastGenOutput>
+      <LastGenOutput>MiCanchaModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\ModelMiCanchaApp.edmx.diagram">
-      <DependentUpon>ModelMiCanchaApp.edmx</DependentUpon>
+    <Content Include="Models\MiCanchaModel.edmx.diagram">
+      <DependentUpon>MiCanchaModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />

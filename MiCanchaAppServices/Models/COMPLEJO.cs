@@ -22,7 +22,6 @@ namespace MiCanchaAppServices.Models
     
         public int ID { get; set; }
         public string NOMBRE { get; set; }
-        public Nullable<int> DUEÑO { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CANCHA> CANCHA { get; set; }

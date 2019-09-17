@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -12,7 +13,7 @@ namespace MiCanchaAppServices.Models.Request
         public string APELLIDO { get; set; }
         public string EMAIL { get; set; }
         public string PASS { get; set; }
-        public Nullable<int> TIPO_USUARIO { get; set; }
+        public int TIPO_USUARIO_ID { get; set; }
 
     }
 }
