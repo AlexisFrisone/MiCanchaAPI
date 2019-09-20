@@ -25,6 +25,5 @@ namespace MiCanchaAppServices.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CANCHA> CANCHA { get; set; }
-        public virtual USUARIO USUARIO { get; set; }
     }
 }

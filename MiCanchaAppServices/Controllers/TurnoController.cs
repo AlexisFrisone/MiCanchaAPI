@@ -10,11 +10,12 @@ namespace MiCanchaAppServices.Controllers
 {
     public class TurnoController : ApiController
     {
+        const string _OK = "OK";
 
         [HttpPost]
         public IHttpActionResult Add(Models.Request.TurnoRequest model)
         {
-            const string _OK = "OK";
+
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
                 try
@@ -25,16 +26,27 @@ namespace MiCanchaAppServices.Controllers
                     oTurno.FECHA = model.FECHA;
                     db.TURNOS.Add(oTurno);
                     db.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    return BadRequest(e.Message);
+                }
             }
-            catch (DbEntityValidationException e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
 
             return Ok(_OK);
         }
 
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
+            {
+                db.TURNOS.Remove(db.TURNOS.ToList().Find(t => t.ID == id));
+                db.SaveChanges();
+            }
+
+            return Ok(_OK);
+        }
 
         [HttpGet]
         public IEnumerable<Models.Request.TurnoRequest> GetAll()
@@ -59,7 +71,7 @@ namespace MiCanchaAppServices.Controllers
 
         }
 
-        
+
         [HttpGet]
         public Models.Request.TurnoRequest GetId(int id)
         {
@@ -67,9 +79,9 @@ namespace MiCanchaAppServices.Controllers
             {
                 var result = new Models.Request.TurnoRequest();
                 var listDBSet = db.TURNOS.ToList();
-                foreach(var element in listDBSet)
+                foreach (var element in listDBSet)
                 {
-                    if(element.ID == id)
+                    if (element.ID == id)
                     {
                         result.ID = element.ID;
                         result.CANCHA_ID = element.CANCHA_ID;
@@ -82,5 +94,43 @@ namespace MiCanchaAppServices.Controllers
             }
         }
 
+
+
+        [HttpPut]
+        public IHttpActionResult Update(Models.Request.TurnoRequest model)
+        {
+            using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
+            {
+                try
+                {
+                    var oTurnoModel = db.TURNOS.ToList().FirstOrDefault(t => t.ID == model.ID);
+                    if (oTurnoModel == null)
+                    {
+                        var oTurno = new Models.TURNOS();
+                        oTurno.USUARIO = model.USUARIO_ID;
+                        oTurno.CANCHA_ID = model.CANCHA_ID;
+                        oTurno.FECHA = model.FECHA;
+                        db.TURNOS.Add(oTurno);
+
+                    }
+                    else
+                    {
+                        oTurnoModel.CANCHA_ID = model.CANCHA_ID;
+                        oTurnoModel.USUARIO = model.USUARIO_ID;
+                        oTurnoModel.FECHA = model.FECHA;
+                    }
+
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    return BadRequest(e.Message);
+                }
+                return Ok(_OK);
+            }
+
+
+
+        }
     }
 }

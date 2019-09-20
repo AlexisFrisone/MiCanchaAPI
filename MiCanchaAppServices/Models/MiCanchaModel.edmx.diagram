@@ -5,8 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="a1ec632e4f3b4f668e06460eeea1ec73" Name="Diagram1">
-        <EntityTypeShape EntityType="MiCanchaAppModel.CANCHA" Width="1.5" PointX="4.25" PointY="3.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MiCanchaAppModel.COMPLEJO" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MiCanchaAppModel.CANCHA" Width="1.5" PointX="4.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MiCanchaAppModel.COMPLEJO" Width="1.5" PointX="0.5" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MiCanchaAppModel.TIPO_USUARIO" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MiCanchaAppModel.TURNOS" Width="1.5" PointX="4.25" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MiCanchaAppModel.USUARIO" Width="1.5" PointX="2.375" PointY="0.5" IsExpanded="true" />

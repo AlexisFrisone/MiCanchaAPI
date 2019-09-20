@@ -10,13 +10,14 @@ namespace MiCanchaAppServices.Controllers
 {
     public class ComplejoController : ApiController
     {
+        const string _OK = "OK";
         [HttpPost]
         public IHttpActionResult Add(Models.Request.ComplejoRequest model)
         {
-            const string _OK = "OK";
+
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
-               
+
                 try
                 {
                     var oComplejo = new Models.COMPLEJO();
@@ -31,6 +32,19 @@ namespace MiCanchaAppServices.Controllers
             }
 
             return Ok(_OK);
+        }
+
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
+            {
+                db.COMPLEJO.Remove(db.COMPLEJO.ToList().Find(c => c.ID == id));
+                db.SaveChanges();
+            }
+
+            return Ok(_OK);
+
         }
 
         [HttpGet]
@@ -74,10 +88,36 @@ namespace MiCanchaAppServices.Controllers
                 return listResult;
             }
 
-
         }
 
+        [HttpPut]
+        public IHttpActionResult Update(Models.Request.ComplejoRequest model)
+        {
+            using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
+            {
+                try
+                {
+                    var oComplejoModel = db.CANCHA.ToList().FirstOrDefault(c => c.ID == model.ID);
+                    if (oComplejoModel == null)
+                    {
+                        var oComplejo = new Models.COMPLEJO();
+                        oComplejo.NOMBRE = model.NOMBRE;
+                        db.COMPLEJO.Add(oComplejo);
+                    }
+                    else
+                    {
+                        oComplejoModel.NOMBRE = model.NOMBRE;
+                    }
 
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    return BadRequest(e.Message);
+                }
+                return Ok(_OK);
+            }
+        }
     }
 }
 

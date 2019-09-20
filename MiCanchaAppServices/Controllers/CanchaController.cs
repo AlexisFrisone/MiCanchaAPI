@@ -10,10 +10,11 @@ namespace MiCanchaAppServices.Controllers
 {
     public class CanchaController : ApiController
     {
+        const string _OK = "OK";
         [HttpPost]
         public IHttpActionResult Add(Models.Request.CanchaRequest model)
         {
-            const string _OK = "OK";
+            
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
                 try { 
@@ -79,7 +80,49 @@ namespace MiCanchaAppServices.Controllers
 
         }
 
-    }
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
+            {
+                db.CANCHA.Remove(db.CANCHA.ToList().Find(c => c.ID == id));
+                db.SaveChanges();
+            }
 
+                return Ok(_OK);
+        }
+
+        [HttpPut]
+        public IHttpActionResult Update(Models.Request.CanchaRequest model)
+        {
+            using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
+            {
+                try
+                {
+                    var oCanchaModel = db.CANCHA.ToList().FirstOrDefault(c => c.ID == model.ID);
+                    if (oCanchaModel == null)
+                    {
+                        var oCancha = new Models.CANCHA();
+                        oCancha.NOMBRE = model.NOMBRE;
+                        oCancha.COMPLEJO = model.COMPLEJO_ID;
+                        db.CANCHA.Add(oCancha);
+                    }
+                    else
+                    {
+                        oCanchaModel.NOMBRE = model.NOMBRE;
+                        oCanchaModel.COMPLEJO = model.COMPLEJO_ID;
+                    }
+
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    return BadRequest(e.Message);
+                }
+                return Ok(_OK);
+            }
+        }
+    }
+    
 }
 
