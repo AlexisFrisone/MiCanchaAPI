@@ -72,7 +72,7 @@ namespace MiCanchaAppServices.Controllers
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
                 var result = new Models.Request.UsuarioRequest();
-                var listDBSet = db.USUARIO.ToList();
+                var listDBSet = db.USUARIO.Where(x => x.ID == id);
                 foreach (var element in listDBSet)
                 {
                     if (element.ID == id)

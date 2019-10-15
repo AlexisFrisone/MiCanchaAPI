@@ -13,7 +13,7 @@ namespace MiCanchaAppServices.Models.Request
         public string APELLIDO { get; set; }
         public string EMAIL { get; set; }
         public string PASS { get; set; }
-        public int TIPO_USUARIO_ID { get; set; }
+        public int? TIPO_USUARIO_ID { get; set; }
 
     }
 }

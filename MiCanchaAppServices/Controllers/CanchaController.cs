@@ -40,7 +40,7 @@ namespace MiCanchaAppServices.Controllers
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
                 var result = new Models.Request.CanchaRequest();
-                var listDBSet = db.CANCHA.ToList();
+                var listDBSet = db.CANCHA.Where(x => x.ID == id);
                 foreach (var element in listDBSet)
                 {
                     if (element.ID == id)

@@ -9,5 +9,6 @@ namespace MiCanchaAppServices.Models.Request
     {
         public int ID { get; set; }
         public string NOMBRE { get; set; }
+        public int? DUENIO_ID { get; set; }
     }
 }

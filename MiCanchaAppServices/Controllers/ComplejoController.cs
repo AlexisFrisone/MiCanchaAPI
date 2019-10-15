@@ -14,7 +14,7 @@ namespace MiCanchaAppServices.Controllers
         [HttpPost]
         public IHttpActionResult Add(Models.Request.ComplejoRequest model)
         {
-
+            
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
 
@@ -22,6 +22,7 @@ namespace MiCanchaAppServices.Controllers
                 {
                     var oComplejo = new Models.COMPLEJO();
                     oComplejo.NOMBRE = model.NOMBRE;
+                    oComplejo.DUENIO = model.DUENIO_ID;
                     db.COMPLEJO.Add(oComplejo);
                     db.SaveChanges();
                 }
@@ -53,13 +54,15 @@ namespace MiCanchaAppServices.Controllers
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
                 var result = new Models.Request.ComplejoRequest();
-                var listDBSet = db.COMPLEJO.ToList();
-                foreach (var element in listDBSet)
+                var listDBSet = db.COMPLEJO.Where(x => x.ID == id);
+          
+                 foreach (var element in listDBSet)
                 {
                     if (element.ID == id)
                     {
                         result.ID = element.ID;
                         result.NOMBRE = element.NOMBRE;
+                        result.DUENIO_ID = element.DUENIO;
                     }
 
                 }
@@ -81,6 +84,7 @@ namespace MiCanchaAppServices.Controllers
                     var result = new Models.Request.ComplejoRequest();
                     result.ID = element.ID;
                     result.NOMBRE = element.NOMBRE;
+                    result.DUENIO_ID = element.DUENIO;
 
                     listResult.Add(result);
                 }
@@ -102,6 +106,7 @@ namespace MiCanchaAppServices.Controllers
                     {
                         var oComplejo = new Models.COMPLEJO();
                         oComplejo.NOMBRE = model.NOMBRE;
+                        oComplejo.DUENIO = model.DUENIO_ID;
                         db.COMPLEJO.Add(oComplejo);
                     }
                     else
