@@ -36,7 +36,7 @@ namespace MiCanchaAppServices.Controllers
 
             }
 
-            return Ok(_OK);
+            return Ok("Usuario registrado con exito");
         }
 
         [HttpGet]
