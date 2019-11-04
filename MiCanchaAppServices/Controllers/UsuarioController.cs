@@ -91,7 +91,7 @@ namespace MiCanchaAppServices.Controllers
                 return result;
             }
         }
-             [HttpGet]
+        [HttpGet]
         public Models.Request.UsuarioRequest GetUserByEmail(string email)
         {
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())

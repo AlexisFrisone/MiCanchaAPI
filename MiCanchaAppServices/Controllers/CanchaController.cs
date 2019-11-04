@@ -34,6 +34,34 @@ namespace MiCanchaAppServices.Controllers
             return Ok(_OK);
         }
 
+
+        //get de canchas by complejo ID
+        [HttpGet]
+        public IEnumerable<Models.Request.CanchaRequest> getCanchaByComplejo(string complejo)
+        {
+            using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
+            {
+                var result = new Models.Request.CanchaRequest();
+                var listResult = new List<Models.Request.CanchaRequest>();
+                var listDBSet = db.CANCHA.ToList();
+                foreach (var element in listDBSet)
+                {
+                    if (element.COMPLEJO == Int32.Parse(complejo))
+                    {
+                        result.ID = element.ID;
+                        result.NOMBRE = element.NOMBRE;
+                        result.COMPLEJO_ID = element.COMPLEJO;
+
+                        listResult.Add(result);
+                    }
+
+                }
+
+                return listResult;
+            }
+
+        }
+
         [HttpGet]
         public Models.Request.CanchaRequest GetId(int id)
         {

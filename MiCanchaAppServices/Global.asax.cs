@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -23,7 +24,7 @@ namespace MiCanchaAppServices
             json.SerializerSettings.PreserveReferencesHandling =
                 Newtonsoft.Json.PreserveReferencesHandling.All;
 
-           
+            GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None;
         }
     }
 }
