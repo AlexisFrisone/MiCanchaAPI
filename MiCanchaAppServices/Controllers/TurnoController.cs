@@ -147,6 +147,7 @@ namespace MiCanchaAppServices.Controllers
                     {
                         var result = new Models.Request.TurnoRequest();
                         result.ID = element.ID;
+                 
                         result.CANCHA_ID = element.CANCHA_ID;
                         result.USUARIO_ID = element.USUARIO;
 
