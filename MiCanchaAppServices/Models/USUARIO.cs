@@ -26,11 +26,11 @@ namespace MiCanchaAppServices.Models
         public string APELLIDO { get; set; }
         public string EMAIL { get; set; }
         public string PASS { get; set; }
-        public Nullable<int> TIPO_USUARIO { get; set; }
+        public int TIPO_USUARIO_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<COMPLEJO> COMPLEJO { get; set; }
-        public virtual TIPO_USUARIO TIPO_USUARIO1 { get; set; }
+        public virtual TIPO_USUARIO TIPO_USUARIO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TURNOS> TURNOS { get; set; }
     }

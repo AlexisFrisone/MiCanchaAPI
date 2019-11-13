@@ -11,6 +11,7 @@ namespace MiCanchaAppServices.Controllers
     public class UsuarioController : ApiController
     {
         const string _OK = "OK";
+        const string _Error_Usuario = "Error , Usuario con turnos pendientes";
 
         [HttpPost]
         public IHttpActionResult Add(Models.Request.UsuarioRequest model)
@@ -24,7 +25,7 @@ namespace MiCanchaAppServices.Controllers
                     oUsuario.NOMBRE = model.NOMBRE;
                     oUsuario.APELLIDO = model.APELLIDO;
                     oUsuario.PASS = model.PASS;
-                    oUsuario.TIPO_USUARIO = model.TIPO_USUARIO_ID;
+                    oUsuario.TIPO_USUARIO_ID = model.TIPO_USUARIO_ID;
                     oUsuario.EMAIL = model.EMAIL;
                     db.USUARIO.Add(oUsuario);     
                     db.SaveChanges();
@@ -54,7 +55,7 @@ namespace MiCanchaAppServices.Controllers
                     result.NOMBRE = element.NOMBRE;
                     result.EMAIL = element.EMAIL;
                     result.PASS = element.PASS;
-                    result.TIPO_USUARIO_ID = element.TIPO_USUARIO;
+                    result.TIPO_USUARIO_ID = element.TIPO_USUARIO_ID;
 
                     listResult.Add(result);
                 }
@@ -82,7 +83,7 @@ namespace MiCanchaAppServices.Controllers
                         result.NOMBRE = element.NOMBRE;
                         result.EMAIL = element.EMAIL;
                         result.PASS = element.PASS;
-                        result.TIPO_USUARIO_ID = element.TIPO_USUARIO;
+                        result.TIPO_USUARIO_ID = element.TIPO_USUARIO_ID;
 
                     }
 
@@ -107,7 +108,7 @@ namespace MiCanchaAppServices.Controllers
                         result.NOMBRE = element.NOMBRE;
                         result.EMAIL = element.EMAIL;
                         result.PASS = element.PASS;
-                        result.TIPO_USUARIO_ID = element.TIPO_USUARIO;
+                        result.TIPO_USUARIO_ID = element.TIPO_USUARIO_ID;
 
                     }
 
@@ -119,15 +120,23 @@ namespace MiCanchaAppServices.Controllers
         }
 
         [HttpDelete]
-        public IHttpActionResult Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
+                /* si el turno es mayor a la fecha y el usuario tiene reserva , no puede borrarse */
+                var turno = db.TURNOS.ToList().Find(c => c.USUARIO_ID == id && c.HORA_INGRESO >= DateTime.Now );
+                
+                if (turno  is null) { 
                 db.USUARIO.Remove(db.USUARIO.ToList().Find(u => u.ID == id));
                 db.SaveChanges();
-            }
+                } else
+                    {
+                    return Request.CreateResponse(HttpStatusCode.NotImplemented, _Error_Usuario);
+                }
+        }
 
-            return Ok(_OK);
+            return Request.CreateResponse(HttpStatusCode.OK, _OK);
         }
 
 
@@ -146,7 +155,7 @@ namespace MiCanchaAppServices.Controllers
                         oUsuario.NOMBRE = model.NOMBRE;
                         oUsuario.EMAIL = model.EMAIL;
                         oUsuario.PASS = model.PASS;
-                        oUsuario.TIPO_USUARIO = model.TIPO_USUARIO_ID;
+                        oUsuario.TIPO_USUARIO_ID = model.TIPO_USUARIO_ID;
                         db.USUARIO.Add(oUsuario);
                     }
                     else
@@ -155,7 +164,7 @@ namespace MiCanchaAppServices.Controllers
                         oUsuarioModel.NOMBRE = model.NOMBRE;
                         oUsuarioModel.EMAIL = model.EMAIL;
                         oUsuarioModel.PASS = model.PASS;
-                        oUsuarioModel.TIPO_USUARIO = model.TIPO_USUARIO_ID;
+                        oUsuarioModel.TIPO_USUARIO_ID = model.TIPO_USUARIO_ID;
                     }
 
                     db.SaveChanges();

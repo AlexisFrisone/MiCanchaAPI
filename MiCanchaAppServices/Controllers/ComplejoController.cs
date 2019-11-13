@@ -11,18 +11,25 @@ namespace MiCanchaAppServices.Controllers
     public class ComplejoController : ApiController
     {
         const string _OK = "OK";
+        const string _Error_Canchas = "Existen canchas asociadas al complejo";
+
+
         [HttpPost]
         public IHttpActionResult Add(Models.Request.ComplejoRequest model)
         {
-            
+
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
+
 
                 try
                 {
                     var oComplejo = new Models.COMPLEJO();
                     oComplejo.NOMBRE = model.NOMBRE;
-                    oComplejo.DUENIO = model.DUENIO_ID;
+                    oComplejo.DUENIO_ID = model.DUENIO_ID;
+                    oComplejo.DIRECCION = model.DIRECCION;
+                    oComplejo.TELEFONO_COMPLEJO = model.TELEFONO_COMPLEJO;
+                    oComplejo.EMAIL_COMPLEJO = model.EMAIL_COMPLEJO;
                     db.COMPLEJO.Add(oComplejo);
                     db.SaveChanges();
                 }
@@ -36,15 +43,23 @@ namespace MiCanchaAppServices.Controllers
         }
 
         [HttpDelete]
-        public IHttpActionResult Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
-                db.COMPLEJO.Remove(db.COMPLEJO.ToList().Find(c => c.ID == id));
-                db.SaveChanges();
+
+                var cancha = db.CANCHA.ToList().Find(c => c.COMPLEJO_ID == id);
+                if (cancha is null)
+                {
+                    db.COMPLEJO.Remove(db.COMPLEJO.ToList().Find(c => c.ID == id));
+                    db.SaveChanges();
+                } else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotImplemented, _Error_Canchas);
+                }                
             }
 
-            return Ok(_OK);
+            return Request.CreateResponse(HttpStatusCode.OK, _OK );
 
         }
 
@@ -62,7 +77,10 @@ namespace MiCanchaAppServices.Controllers
                     {
                         result.ID = element.ID;
                         result.NOMBRE = element.NOMBRE;
-                        result.DUENIO_ID = element.DUENIO;
+                        result.DUENIO_ID = element.DUENIO_ID;
+                        result.DIRECCION = element.DIRECCION;
+                        result.TELEFONO_COMPLEJO = element.TELEFONO_COMPLEJO;
+                        result.EMAIL_COMPLEJO = element.EMAIL_COMPLEJO;
                     }
 
                 }
@@ -77,6 +95,7 @@ namespace MiCanchaAppServices.Controllers
         {
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
+
                 var listResult = new List<Models.Request.ComplejoRequest>();
                 var listDBSet = db.COMPLEJO.ToList();
                 foreach (var element in listDBSet)
@@ -84,7 +103,10 @@ namespace MiCanchaAppServices.Controllers
                     var result = new Models.Request.ComplejoRequest();
                     result.ID = element.ID;
                     result.NOMBRE = element.NOMBRE;
-                    result.DUENIO_ID = element.DUENIO;
+                    result.DUENIO_ID = element.DUENIO_ID;
+                    result.DIRECCION = element.DIRECCION;
+                    result.TELEFONO_COMPLEJO = element.TELEFONO_COMPLEJO;
+                    result.EMAIL_COMPLEJO = element.EMAIL_COMPLEJO;
 
                     listResult.Add(result);
                 }
@@ -106,8 +128,12 @@ namespace MiCanchaAppServices.Controllers
                     {
                         var oComplejo = new Models.COMPLEJO();
                         oComplejo.NOMBRE = model.NOMBRE;
-                        oComplejo.DUENIO = model.DUENIO_ID;
+                        oComplejo.DUENIO_ID = model.DUENIO_ID;
+                        oComplejo.DIRECCION = model.DIRECCION;
+                        oComplejo.TELEFONO_COMPLEJO = model.TELEFONO_COMPLEJO;
+                        oComplejo.EMAIL_COMPLEJO = model.EMAIL_COMPLEJO;
                         db.COMPLEJO.Add(oComplejo);
+
                     }
                     else
                     {

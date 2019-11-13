@@ -16,10 +16,11 @@ namespace MiCanchaAppServices.Models
     {
         public int ID { get; set; }
         public Nullable<int> CANCHA_ID { get; set; }
-        public Nullable<int> USUARIO { get; set; }
-        public System.DateTime FECHA { get; set; }
+        public Nullable<int> USUARIO_ID { get; set; }
+        public System.DateTime HORA_INGRESO { get; set; }
+        public Nullable<bool> RESERVADO { get; set; }
     
         public virtual CANCHA CANCHA { get; set; }
-        public virtual USUARIO USUARIO1 { get; set; }
+        public virtual USUARIO USUARIO { get; set; }
     }
 }

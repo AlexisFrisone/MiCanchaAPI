@@ -11,6 +11,7 @@ namespace MiCanchaAppServices.Controllers
     public class TurnoController : ApiController
     {
         const string _OK = "OK";
+        const string _Error_Turno = "Error , Turno reservado ";
 
         [HttpPost]
         public IHttpActionResult Add(Models.Request.TurnoRequest model)
@@ -21,9 +22,10 @@ namespace MiCanchaAppServices.Controllers
                 try
                 {
                     var oTurno = new Models.TURNOS();
-                    oTurno.USUARIO = model.USUARIO_ID;
+                    oTurno.USUARIO_ID = model.USUARIO_ID;
                     oTurno.CANCHA_ID = model.CANCHA_ID;
-                    oTurno.FECHA = model.FECHA;
+                    oTurno.HORA_INGRESO = model.HORA_INGRESO;
+                    oTurno.RESERVADO = model.RESERVADO;
                     db.TURNOS.Add(oTurno);
                     db.SaveChanges();
                 }
@@ -37,15 +39,24 @@ namespace MiCanchaAppServices.Controllers
         }
 
         [HttpDelete]
-        public IHttpActionResult Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
-                db.TURNOS.Remove(db.TURNOS.ToList().Find(t => t.ID == id));
-                db.SaveChanges();
+                /* Solo se borran los turnos no reservados*/
+                var turno  = db.TURNOS.ToList().Find(t => t.ID == id && t.RESERVADO == true );
+                if (turno is null)
+                {
+                    db.TURNOS.Remove(db.TURNOS.ToList().Find(t => t.ID == id));
+                    db.SaveChanges();
+                }else
+                {
+                   return  Request.CreateResponse(HttpStatusCode.NotImplemented, _Error_Turno);
+                }
+               
             }
 
-            return Ok(_OK);
+            return Request.CreateResponse(HttpStatusCode.OK, _OK);
         }
 
         [HttpGet]
@@ -60,7 +71,9 @@ namespace MiCanchaAppServices.Controllers
                     var result = new Models.Request.TurnoRequest();
                     result.ID = element.ID;
                     result.CANCHA_ID = element.CANCHA_ID;
-                    result.USUARIO_ID = element.USUARIO;
+                    result.USUARIO_ID = element.USUARIO_ID;
+                    result.HORA_INGRESO = element.HORA_INGRESO;
+                    result.RESERVADO = element.RESERVADO;
 
                     listResult.Add(result);
                 }
@@ -85,7 +98,9 @@ namespace MiCanchaAppServices.Controllers
                     {
                         result.ID = element.ID;
                         result.CANCHA_ID = element.CANCHA_ID;
-                        result.USUARIO_ID = element.USUARIO;
+                        result.USUARIO_ID = element.USUARIO_ID;
+                        result.HORA_INGRESO = element.HORA_INGRESO;
+                        result.RESERVADO = element.RESERVADO;
                     }
 
                 }
@@ -107,17 +122,18 @@ namespace MiCanchaAppServices.Controllers
                     if (oTurnoModel == null)
                     {
                         var oTurno = new Models.TURNOS();
-                        oTurno.USUARIO = model.USUARIO_ID;
+                        oTurno.USUARIO_ID = model.USUARIO_ID;
                         oTurno.CANCHA_ID = model.CANCHA_ID;
-                        oTurno.FECHA = model.FECHA;
+                        oTurno.HORA_INGRESO = model.HORA_INGRESO;
                         db.TURNOS.Add(oTurno);
 
                     }
                     else
                     {
                         oTurnoModel.CANCHA_ID = model.CANCHA_ID;
-                        oTurnoModel.USUARIO = model.USUARIO_ID;
-                        oTurnoModel.FECHA = model.FECHA;
+                        oTurnoModel.USUARIO_ID = model.USUARIO_ID;
+                        oTurnoModel.HORA_INGRESO = model.HORA_INGRESO;
+                        oTurnoModel.RESERVADO = model.RESERVADO;
                     }
 
                     db.SaveChanges();
@@ -143,13 +159,12 @@ namespace MiCanchaAppServices.Controllers
 
                 foreach (var element in listDBSet)
                 {
-                    if (element.USUARIO == Int32.Parse(userId))
+                    if (element.USUARIO_ID == Int32.Parse(userId))
                     {
                         var result = new Models.Request.TurnoRequest();
-                        result.ID = element.ID;
-                 
+                        result.ID = element.ID;                 
                         result.CANCHA_ID = element.CANCHA_ID;
-                        result.USUARIO_ID = element.USUARIO;
+                        result.USUARIO_ID = element.USUARIO_ID;
 
                         listResult.Add(result);
                     }

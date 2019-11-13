@@ -11,6 +11,8 @@ namespace MiCanchaAppServices.Controllers
     public class CanchaController : ApiController
     {
         const string _OK = "OK";
+        const string _Error_Turnos = "Existen turnos asignados para esta cancha "; 
+
         [HttpPost]
         public IHttpActionResult Add(Models.Request.CanchaRequest model)
         {
@@ -20,7 +22,7 @@ namespace MiCanchaAppServices.Controllers
                 try { 
                     var oCancha= new Models.CANCHA();
                     oCancha.NOMBRE = model.NOMBRE;
-                    oCancha.COMPLEJO = model.COMPLEJO_ID;
+                    oCancha.COMPLEJO_ID = model.COMPLEJO_ID;
                     db.CANCHA.Add(oCancha);
                     db.SaveChanges();
                  }
@@ -46,11 +48,11 @@ namespace MiCanchaAppServices.Controllers
                 var listDBSet = db.CANCHA.ToList();
                 foreach (var element in listDBSet)
                 {
-                    if (element.COMPLEJO == Int32.Parse(complejo))
+                    if (element.COMPLEJO_ID == Int32.Parse(complejo))
                     {
                         result.ID = element.ID;
                         result.NOMBRE = element.NOMBRE;
-                        result.COMPLEJO_ID = element.COMPLEJO;
+                        result.COMPLEJO_ID = element.COMPLEJO_ID;
 
                         listResult.Add(result);
                     }
@@ -75,7 +77,7 @@ namespace MiCanchaAppServices.Controllers
                     {
                         result.ID = element.ID;
                         result.NOMBRE = element.NOMBRE;
-                        result.COMPLEJO_ID = element.COMPLEJO;
+                        result.COMPLEJO_ID = element.COMPLEJO_ID;
                     }
 
                 }
@@ -97,7 +99,7 @@ namespace MiCanchaAppServices.Controllers
                     var result = new Models.Request.CanchaRequest();
                     result.ID = element.ID;
                     result.NOMBRE = element.NOMBRE;
-                    result.COMPLEJO_ID = element.COMPLEJO;
+                    result.COMPLEJO_ID = element.COMPLEJO_ID;
 
                     listResult.Add(result);
                 }
@@ -109,15 +111,23 @@ namespace MiCanchaAppServices.Controllers
         }
 
         [HttpDelete]
-        public IHttpActionResult Delete(int id)
+        public HttpResponseMessage Delete(int id)
         {
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
-                db.CANCHA.Remove(db.CANCHA.ToList().Find(c => c.ID == id));
-                db.SaveChanges();
+                var turnos = db.TURNOS.ToList().First(c => c.CANCHA_ID == id);
+                if (turnos is null)
+                {
+                    db.CANCHA.Remove(db.CANCHA.ToList().Find(c => c.ID == id));
+                    db.SaveChanges();
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotImplemented, _Error_Turnos);
+                }
             }
 
-                return Ok(_OK);
+            return Request.CreateResponse(HttpStatusCode.OK, _OK);
         }
 
         [HttpPut]
@@ -132,13 +142,13 @@ namespace MiCanchaAppServices.Controllers
                     {
                         var oCancha = new Models.CANCHA();
                         oCancha.NOMBRE = model.NOMBRE;
-                        oCancha.COMPLEJO = model.COMPLEJO_ID;
+                        oCancha.COMPLEJO_ID = model.COMPLEJO_ID;
                         db.CANCHA.Add(oCancha);
                     }
                     else
                     {
                         oCanchaModel.NOMBRE = model.NOMBRE;
-                        oCanchaModel.COMPLEJO = model.COMPLEJO_ID;
+                        oCanchaModel.COMPLEJO_ID = model.COMPLEJO_ID;
                     }
 
                     db.SaveChanges();
