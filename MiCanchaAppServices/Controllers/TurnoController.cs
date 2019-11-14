@@ -175,6 +175,36 @@ namespace MiCanchaAppServices.Controllers
 
 
         }
+
+
+        [HttpGet]
+        public IEnumerable<Models.Request.TurnoRequest> GetTurnoByCancha(string canchaId)
+        {
+            using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
+            {
+                var listResult = new List<Models.Request.TurnoRequest>();
+                var listDBSet = db.TURNOS.ToList();
+
+                foreach (var element in listDBSet)
+                {
+                    if (element.CANCHA_ID == Int32.Parse(canchaId))
+                    {
+                        var result = new Models.Request.TurnoRequest();
+                        result.ID = element.ID;
+                        result.CANCHA_ID = element.CANCHA_ID;
+                        result.USUARIO_ID = element.USUARIO_ID;
+                        result.HORA_INGRESO = element.HORA_INGRESO;
+                        result.RESERVADO = element.RESERVADO;
+                        
+                        listResult.Add(result);
+                    }
+                }
+
+                return listResult;
+            }
+
+
+        }
     }
 
 
