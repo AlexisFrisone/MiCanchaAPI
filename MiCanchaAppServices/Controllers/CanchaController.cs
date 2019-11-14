@@ -43,13 +43,14 @@ namespace MiCanchaAppServices.Controllers
         {
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
-                var result = new Models.Request.CanchaRequest();
+                
                 var listResult = new List<Models.Request.CanchaRequest>();
                 var listDBSet = db.CANCHA.ToList();
                 foreach (var element in listDBSet)
                 {
                     if (element.COMPLEJO_ID == Int32.Parse(complejo))
                     {
+                        var result = new Models.Request.CanchaRequest();
                         result.ID = element.ID;
                         result.NOMBRE = element.NOMBRE;
                         result.COMPLEJO_ID = element.COMPLEJO_ID;
