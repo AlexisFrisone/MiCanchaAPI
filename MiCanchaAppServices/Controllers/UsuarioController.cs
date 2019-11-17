@@ -72,12 +72,12 @@ namespace MiCanchaAppServices.Controllers
         {
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
+                var result = new Models.Request.UsuarioRequest();
                 var listDBSet = db.USUARIO.Where(x => x.ID == id);
                 foreach (var element in listDBSet)
                 {
                     if (element.ID == id)
                     {
-                        var result = new Models.Request.UsuarioRequest();
                         result.ID = element.ID;
                         result.APELLIDO = element.APELLIDO;
                         result.NOMBRE = element.NOMBRE;
@@ -97,12 +97,12 @@ namespace MiCanchaAppServices.Controllers
         {
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
+                var result = new Models.Request.UsuarioRequest();
                 var listDBSet = db.USUARIO.ToList();
                 foreach (var element in listDBSet)
                 {
                     if (element.EMAIL == email)
                     {
-                        var result = new Models.Request.UsuarioRequest();
                         result.ID = element.ID;
                         result.APELLIDO = element.APELLIDO;
                         result.NOMBRE = element.NOMBRE;

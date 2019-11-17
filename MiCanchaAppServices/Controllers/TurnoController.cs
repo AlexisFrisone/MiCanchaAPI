@@ -89,12 +89,13 @@ namespace MiCanchaAppServices.Controllers
         {
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
+                var result = new Models.Request.TurnoRequest();
                 var listDBSet = db.TURNOS.Where(x => x.ID == id);
                 foreach (var element in listDBSet)
                 {
                     if (element.ID == id)
                     {
-                        var result = new Models.Request.TurnoRequest();
+                       
                         result.ID = element.ID;
                         result.CANCHA_ID = element.CANCHA_ID;
                         result.USUARIO_ID = element.USUARIO_ID;
