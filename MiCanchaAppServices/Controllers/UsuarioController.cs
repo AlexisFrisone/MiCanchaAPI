@@ -111,7 +111,6 @@ namespace MiCanchaAppServices.Controllers
                         result.TIPO_USUARIO_ID = element.TIPO_USUARIO_ID;
 
                     }
-
                 }
                 return result;
             }
