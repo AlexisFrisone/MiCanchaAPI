@@ -81,7 +81,6 @@ namespace MiCanchaAppServices.Controllers
                 return listResult;
             }
 
-
         }
 
 

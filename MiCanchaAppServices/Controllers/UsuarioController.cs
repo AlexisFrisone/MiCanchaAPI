@@ -113,7 +113,6 @@ namespace MiCanchaAppServices.Controllers
                     }
 
                 }
-
                 return result;
             }
 
