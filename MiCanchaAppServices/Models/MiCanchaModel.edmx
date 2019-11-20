@@ -11,6 +11,7 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PRECIO" Type="int" />
           <Property Name="COMPLEJO_ID" Type="int" />
         </EntityType>
         <EntityType Name="COMPLEJO">
@@ -36,7 +37,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CANCHA_ID" Type="int" />
+          <Property Name="CANCHA_ID" Type="int" Nullable="false" />
           <Property Name="USUARIO_ID" Type="int" />
           <Property Name="HORA_INGRESO" Type="datetime" Nullable="false" />
           <Property Name="RESERVADO" Type="bit" />
@@ -52,7 +53,7 @@
           <Property Name="PASS" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="TIPO_USUARIO_ID" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK__CANCHA__COMPLEJO__0C50D423">
+        <Association Name="FK__CANCHA__COMPLEJO__345EC57D">
           <End Role="COMPLEJO" Type="Self.COMPLEJO" Multiplicity="0..1" />
           <End Role="CANCHA" Type="Self.CANCHA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -64,7 +65,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__COMPLEJO__DUENIO__09746778">
+        <Association Name="FK__COMPLEJO__DUENIO__308E3499">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
           <End Role="COMPLEJO" Type="Self.COMPLEJO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -76,8 +77,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TURNOS__CANCHA_I__0F2D40CE">
-          <End Role="CANCHA" Type="Self.CANCHA" Multiplicity="0..1" />
+        <Association Name="FK__TURNOS__CANCHA_I__373B3228">
+          <End Role="CANCHA" Type="Self.CANCHA" Multiplicity="1" />
           <End Role="TURNOS" Type="Self.TURNOS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CANCHA">
@@ -88,7 +89,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TURNOS__USUARIO___10216507">
+        <Association Name="FK__TURNOS__USUARIO___382F5661">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
           <End Role="TURNOS" Type="Self.TURNOS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -100,7 +101,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USUARIO__TIPO_US__0697FACD">
+        <Association Name="FK__USUARIO__TIPO_US__2DB1C7EE">
           <End Role="TIPO_USUARIO" Type="Self.TIPO_USUARIO" Multiplicity="1" />
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -118,23 +119,23 @@
           <EntitySet Name="TIPO_USUARIO" EntityType="Self.TIPO_USUARIO" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TURNOS" EntityType="Self.TURNOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__CANCHA__COMPLEJO__0C50D423" Association="Self.FK__CANCHA__COMPLEJO__0C50D423">
+          <AssociationSet Name="FK__CANCHA__COMPLEJO__345EC57D" Association="Self.FK__CANCHA__COMPLEJO__345EC57D">
             <End Role="COMPLEJO" EntitySet="COMPLEJO" />
             <End Role="CANCHA" EntitySet="CANCHA" />
           </AssociationSet>
-          <AssociationSet Name="FK__COMPLEJO__DUENIO__09746778" Association="Self.FK__COMPLEJO__DUENIO__09746778">
+          <AssociationSet Name="FK__COMPLEJO__DUENIO__308E3499" Association="Self.FK__COMPLEJO__DUENIO__308E3499">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="COMPLEJO" EntitySet="COMPLEJO" />
           </AssociationSet>
-          <AssociationSet Name="FK__TURNOS__CANCHA_I__0F2D40CE" Association="Self.FK__TURNOS__CANCHA_I__0F2D40CE">
+          <AssociationSet Name="FK__TURNOS__CANCHA_I__373B3228" Association="Self.FK__TURNOS__CANCHA_I__373B3228">
             <End Role="CANCHA" EntitySet="CANCHA" />
             <End Role="TURNOS" EntitySet="TURNOS" />
           </AssociationSet>
-          <AssociationSet Name="FK__TURNOS__USUARIO___10216507" Association="Self.FK__TURNOS__USUARIO___10216507">
+          <AssociationSet Name="FK__TURNOS__USUARIO___382F5661" Association="Self.FK__TURNOS__USUARIO___382F5661">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="TURNOS" EntitySet="TURNOS" />
           </AssociationSet>
-          <AssociationSet Name="FK__USUARIO__TIPO_US__0697FACD" Association="Self.FK__USUARIO__TIPO_US__0697FACD">
+          <AssociationSet Name="FK__USUARIO__TIPO_US__2DB1C7EE" Association="Self.FK__USUARIO__TIPO_US__2DB1C7EE">
             <End Role="TIPO_USUARIO" EntitySet="TIPO_USUARIO" />
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
@@ -150,9 +151,10 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRECIO" Type="Int32" />
           <Property Name="COMPLEJO_ID" Type="Int32" />
-          <NavigationProperty Name="COMPLEJO" Relationship="Self.FK__CANCHA__COMPLEJO__0C50D423" FromRole="CANCHA" ToRole="COMPLEJO" />
-          <NavigationProperty Name="TURNOS" Relationship="Self.FK__TURNOS__CANCHA_I__0F2D40CE" FromRole="CANCHA" ToRole="TURNOS" />
+          <NavigationProperty Name="COMPLEJO" Relationship="Self.FK__CANCHA__COMPLEJO__345EC57D" FromRole="CANCHA" ToRole="COMPLEJO" />
+          <NavigationProperty Name="TURNOS" Relationship="Self.FK__TURNOS__CANCHA_I__373B3228" FromRole="CANCHA" ToRole="TURNOS" />
         </EntityType>
         <EntityType Name="COMPLEJO">
           <Key>
@@ -164,8 +166,8 @@
           <Property Name="EMAIL_COMPLEJO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="TELEFONO_COMPLEJO" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="DUENIO_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CANCHA" Relationship="Self.FK__CANCHA__COMPLEJO__0C50D423" FromRole="COMPLEJO" ToRole="CANCHA" />
-          <NavigationProperty Name="USUARIO" Relationship="Self.FK__COMPLEJO__DUENIO__09746778" FromRole="COMPLEJO" ToRole="USUARIO" />
+          <NavigationProperty Name="CANCHA" Relationship="Self.FK__CANCHA__COMPLEJO__345EC57D" FromRole="COMPLEJO" ToRole="CANCHA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK__COMPLEJO__DUENIO__308E3499" FromRole="COMPLEJO" ToRole="USUARIO" />
         </EntityType>
         <EntityType Name="TIPO_USUARIO">
           <Key>
@@ -173,19 +175,19 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TIPO_USUARIO1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="USUARIO" Relationship="Self.FK__USUARIO__TIPO_US__0697FACD" FromRole="TIPO_USUARIO" ToRole="USUARIO" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK__USUARIO__TIPO_US__2DB1C7EE" FromRole="TIPO_USUARIO" ToRole="USUARIO" />
         </EntityType>
         <EntityType Name="TURNOS">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CANCHA_ID" Type="Int32" />
+          <Property Name="CANCHA_ID" Type="Int32" Nullable="false" />
           <Property Name="USUARIO_ID" Type="Int32" />
           <Property Name="HORA_INGRESO" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="RESERVADO" Type="Boolean" />
-          <NavigationProperty Name="CANCHA" Relationship="Self.FK__TURNOS__CANCHA_I__0F2D40CE" FromRole="TURNOS" ToRole="CANCHA" />
-          <NavigationProperty Name="USUARIO" Relationship="Self.FK__TURNOS__USUARIO___10216507" FromRole="TURNOS" ToRole="USUARIO" />
+          <NavigationProperty Name="CANCHA" Relationship="Self.FK__TURNOS__CANCHA_I__373B3228" FromRole="TURNOS" ToRole="CANCHA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK__TURNOS__USUARIO___382F5661" FromRole="TURNOS" ToRole="USUARIO" />
         </EntityType>
         <EntityType Name="USUARIO">
           <Key>
@@ -197,11 +199,11 @@
           <Property Name="EMAIL" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="PASS" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="TIPO_USUARIO_ID" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="COMPLEJO" Relationship="Self.FK__COMPLEJO__DUENIO__09746778" FromRole="USUARIO" ToRole="COMPLEJO" />
-          <NavigationProperty Name="TIPO_USUARIO" Relationship="Self.FK__USUARIO__TIPO_US__0697FACD" FromRole="USUARIO" ToRole="TIPO_USUARIO" />
-          <NavigationProperty Name="TURNOS" Relationship="Self.FK__TURNOS__USUARIO___10216507" FromRole="USUARIO" ToRole="TURNOS" />
+          <NavigationProperty Name="COMPLEJO" Relationship="Self.FK__COMPLEJO__DUENIO__308E3499" FromRole="USUARIO" ToRole="COMPLEJO" />
+          <NavigationProperty Name="TIPO_USUARIO" Relationship="Self.FK__USUARIO__TIPO_US__2DB1C7EE" FromRole="USUARIO" ToRole="TIPO_USUARIO" />
+          <NavigationProperty Name="TURNOS" Relationship="Self.FK__TURNOS__USUARIO___382F5661" FromRole="USUARIO" ToRole="TURNOS" />
         </EntityType>
-        <Association Name="FK__CANCHA__COMPLEJO__0C50D423">
+        <Association Name="FK__CANCHA__COMPLEJO__345EC57D">
           <End Role="COMPLEJO" Type="Self.COMPLEJO" Multiplicity="0..1" />
           <End Role="CANCHA" Type="Self.CANCHA" Multiplicity="*" />
           <ReferentialConstraint>
@@ -213,8 +215,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TURNOS__CANCHA_I__0F2D40CE">
-          <End Role="CANCHA" Type="Self.CANCHA" Multiplicity="0..1" />
+        <Association Name="FK__TURNOS__CANCHA_I__373B3228">
+          <End Role="CANCHA" Type="Self.CANCHA" Multiplicity="1" />
           <End Role="TURNOS" Type="Self.TURNOS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CANCHA">
@@ -225,7 +227,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__COMPLEJO__DUENIO__09746778">
+        <Association Name="FK__COMPLEJO__DUENIO__308E3499">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
           <End Role="COMPLEJO" Type="Self.COMPLEJO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -237,7 +239,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USUARIO__TIPO_US__0697FACD">
+        <Association Name="FK__USUARIO__TIPO_US__2DB1C7EE">
           <End Role="TIPO_USUARIO" Type="Self.TIPO_USUARIO" Multiplicity="1" />
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
           <ReferentialConstraint>
@@ -249,7 +251,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__TURNOS__USUARIO___10216507">
+        <Association Name="FK__TURNOS__USUARIO___382F5661">
           <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="0..1" />
           <End Role="TURNOS" Type="Self.TURNOS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -267,23 +269,23 @@
           <EntitySet Name="TIPO_USUARIO" EntityType="Self.TIPO_USUARIO" />
           <EntitySet Name="TURNOS" EntityType="Self.TURNOS" />
           <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
-          <AssociationSet Name="FK__CANCHA__COMPLEJO__0C50D423" Association="Self.FK__CANCHA__COMPLEJO__0C50D423">
+          <AssociationSet Name="FK__CANCHA__COMPLEJO__345EC57D" Association="Self.FK__CANCHA__COMPLEJO__345EC57D">
             <End Role="COMPLEJO" EntitySet="COMPLEJO" />
             <End Role="CANCHA" EntitySet="CANCHA" />
           </AssociationSet>
-          <AssociationSet Name="FK__TURNOS__CANCHA_I__0F2D40CE" Association="Self.FK__TURNOS__CANCHA_I__0F2D40CE">
+          <AssociationSet Name="FK__TURNOS__CANCHA_I__373B3228" Association="Self.FK__TURNOS__CANCHA_I__373B3228">
             <End Role="CANCHA" EntitySet="CANCHA" />
             <End Role="TURNOS" EntitySet="TURNOS" />
           </AssociationSet>
-          <AssociationSet Name="FK__COMPLEJO__DUENIO__09746778" Association="Self.FK__COMPLEJO__DUENIO__09746778">
+          <AssociationSet Name="FK__COMPLEJO__DUENIO__308E3499" Association="Self.FK__COMPLEJO__DUENIO__308E3499">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="COMPLEJO" EntitySet="COMPLEJO" />
           </AssociationSet>
-          <AssociationSet Name="FK__USUARIO__TIPO_US__0697FACD" Association="Self.FK__USUARIO__TIPO_US__0697FACD">
+          <AssociationSet Name="FK__USUARIO__TIPO_US__2DB1C7EE" Association="Self.FK__USUARIO__TIPO_US__2DB1C7EE">
             <End Role="TIPO_USUARIO" EntitySet="TIPO_USUARIO" />
             <End Role="USUARIO" EntitySet="USUARIO" />
           </AssociationSet>
-          <AssociationSet Name="FK__TURNOS__USUARIO___10216507" Association="Self.FK__TURNOS__USUARIO___10216507">
+          <AssociationSet Name="FK__TURNOS__USUARIO___382F5661" Association="Self.FK__TURNOS__USUARIO___382F5661">
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="TURNOS" EntitySet="TURNOS" />
           </AssociationSet>
@@ -299,6 +301,7 @@
               <MappingFragment StoreEntitySet="CANCHA">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
                 <ScalarProperty Name="COMPLEJO_ID" ColumnName="COMPLEJO_ID" />
               </MappingFragment>
             </EntityTypeMapping>

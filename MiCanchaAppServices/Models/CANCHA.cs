@@ -22,6 +22,7 @@ namespace MiCanchaAppServices.Models
     
         public int ID { get; set; }
         public string NOMBRE { get; set; }
+        public Nullable<int> PRECIO { get; set; }
         public Nullable<int> COMPLEJO_ID { get; set; }
     
         public virtual COMPLEJO COMPLEJO { get; set; }

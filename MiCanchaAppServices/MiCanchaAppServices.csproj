@@ -178,9 +178,11 @@
     <Compile Include="Models\CANCHA.cs">
       <DependentUpon>MiCanchaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Request\CanchaRequest.cs" />
     <Compile Include="Models\COMPLEJO.cs">
       <DependentUpon>MiCanchaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Request\ComplejoRequest.cs" />
     <Compile Include="Models\MiCanchaModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -196,20 +198,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MiCanchaModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Request\CanchaRequest.cs" />
-    <Compile Include="Models\Request\ComplejoRequest.cs" />
     <Compile Include="Models\Request\TipoUsuarioRequest.cs" />
-    <Compile Include="Models\Request\TurnoRequest.cs" />
-    <Compile Include="Models\Request\UsuarioRequest.cs" />
     <Compile Include="Models\TIPO_USUARIO.cs">
       <DependentUpon>MiCanchaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Request\TurnoRequest.cs" />
     <Compile Include="Models\TURNOS.cs">
       <DependentUpon>MiCanchaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\USUARIO.cs">
       <DependentUpon>MiCanchaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Request\UsuarioRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

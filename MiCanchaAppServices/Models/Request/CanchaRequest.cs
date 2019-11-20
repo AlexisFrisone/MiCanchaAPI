@@ -10,5 +10,6 @@ namespace MiCanchaAppServices.Models.Request
         public int ID { get; set; }
         public string NOMBRE { get; set; }
         public int? COMPLEJO_ID { get; set; }
+        public int? PRECIO { get; set; }
     }
 }

@@ -23,6 +23,7 @@ namespace MiCanchaAppServices.Controllers
                     var oCancha= new Models.CANCHA();
                     oCancha.NOMBRE = model.NOMBRE;
                     oCancha.COMPLEJO_ID = model.COMPLEJO_ID;
+                    oCancha.PRECIO = model.PRECIO;
                     db.CANCHA.Add(oCancha);
                     db.SaveChanges();
                  }
@@ -54,6 +55,7 @@ namespace MiCanchaAppServices.Controllers
                         result.ID = element.ID;
                         result.NOMBRE = element.NOMBRE;
                         result.COMPLEJO_ID = element.COMPLEJO_ID;
+                        result.PRECIO = element.PRECIO;
 
                         listResult.Add(result);
                     }
@@ -78,6 +80,7 @@ namespace MiCanchaAppServices.Controllers
                     {
                         result.ID = element.ID;
                         result.NOMBRE = element.NOMBRE;
+                        result.PRECIO = element.PRECIO;
                         result.COMPLEJO_ID = element.COMPLEJO_ID;
                     }
 
@@ -101,6 +104,7 @@ namespace MiCanchaAppServices.Controllers
                     result.ID = element.ID;
                     result.NOMBRE = element.NOMBRE;
                     result.COMPLEJO_ID = element.COMPLEJO_ID;
+                    result.PRECIO = element.PRECIO;
 
                     listResult.Add(result);
                 }
@@ -144,11 +148,13 @@ namespace MiCanchaAppServices.Controllers
                         var oCancha = new Models.CANCHA();
                         oCancha.NOMBRE = model.NOMBRE;
                         oCancha.COMPLEJO_ID = model.COMPLEJO_ID;
+                        oCancha.PRECIO = model.PRECIO;
                         db.CANCHA.Add(oCancha);
                     }
                     else
                     {
                         oCanchaModel.NOMBRE = model.NOMBRE;
+                        oCanchaModel.PRECIO = model.PRECIO;
                         oCanchaModel.COMPLEJO_ID = model.COMPLEJO_ID;
                     }
 

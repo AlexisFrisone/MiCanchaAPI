@@ -15,7 +15,7 @@ namespace MiCanchaAppServices.Models
     public partial class TURNOS
     {
         public int ID { get; set; }
-        public Nullable<int> CANCHA_ID { get; set; }
+        public int CANCHA_ID { get; set; }
         public Nullable<int> USUARIO_ID { get; set; }
         public System.DateTime HORA_INGRESO { get; set; }
         public Nullable<bool> RESERVADO { get; set; }
