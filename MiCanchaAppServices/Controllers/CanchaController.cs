@@ -120,7 +120,7 @@ namespace MiCanchaAppServices.Controllers
         {
             using (Models.MiCanchaDBContext db = new Models.MiCanchaDBContext())
             {
-                var turnos = db.TURNOS.ToList().First(c => c.CANCHA_ID == id);
+                var turnos = db.TURNOS.ToList().FirstOrDefault(c => c.CANCHA_ID == id);
                 if (turnos is null)
                 {
                     db.CANCHA.Remove(db.CANCHA.ToList().Find(c => c.ID == id));
