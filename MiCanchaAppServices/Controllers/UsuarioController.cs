@@ -26,7 +26,7 @@ namespace MiCanchaAppServices.Controllers
                     oUsuario.APELLIDO = model.APELLIDO;
                     oUsuario.PASS = model.PASS;
                     oUsuario.TIPO_USUARIO_ID = model.TIPO_USUARIO_ID;
-                    oUsuario.EMAIL = model.EMAIL;
+                    oUsuario.EMAIL = model.EMAIL.Replace("-", "@");
                     db.USUARIO.Add(oUsuario);     
                     db.SaveChanges();
                 }
