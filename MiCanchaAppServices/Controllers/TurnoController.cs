@@ -165,6 +165,8 @@ namespace MiCanchaAppServices.Controllers
                         result.ID = element.ID;                 
                         result.CANCHA_ID = element.CANCHA_ID;
                         result.USUARIO_ID = element.USUARIO_ID;
+                        result.HORA_INGRESO = element.HORA_INGRESO;
+                        result.RESERVADO = element.RESERVADO;
 
                         listResult.Add(result);
                     }
