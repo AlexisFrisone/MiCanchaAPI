@@ -11,7 +11,6 @@ namespace MiCanchaAppServices.Models.Request
         public string NOMBRE { get; set; }
         public int DUENIO_ID { get; set; }
         public string DIRECCION { get; set; }
-        public string EMAIL_COMPLEJO { get; set; }
         public string TELEFONO_COMPLEJO { get; set; }
 
     }

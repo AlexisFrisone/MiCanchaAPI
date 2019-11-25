@@ -4,17 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6459783c6ff94a28af5f2c1352b11a5a" Name="Diagram1">
-        <EntityTypeShape EntityType="MiCanchaAppModel.CANCHA" Width="1.5" PointX="4.125" PointY="3.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MiCanchaAppModel.COMPLEJO" Width="1.5" PointX="0.5" PointY="2.375" IsExpanded="true" />
+      <Diagram DiagramId="3b4d65658e2a4bcdb750d77f7bf10734" Name="Diagram1">
+        <EntityTypeShape EntityType="MiCanchaAppModel.CANCHA" Width="1.5" PointX="4.875" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MiCanchaAppModel.COMPLEJO" Width="1.5" PointX="0.5" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MiCanchaAppModel.TIPO_USUARIO" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MiCanchaAppModel.TURNOS" Width="1.5" PointX="4.25" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MiCanchaAppModel.USUARIO" Width="1.5" PointX="2.25" PointY="0.5" IsExpanded="true" />
-        <AssociationConnector Association="MiCanchaAppModel.FK__CANCHA__COMPLEJO__345EC57D" ManuallyRouted="false" />
-        <AssociationConnector Association="MiCanchaAppModel.FK__TURNOS__CANCHA_I__373B3228" ManuallyRouted="false" />
-        <AssociationConnector Association="MiCanchaAppModel.FK__COMPLEJO__DUENIO__308E3499" ManuallyRouted="false" />
-        <AssociationConnector Association="MiCanchaAppModel.FK__USUARIO__TIPO_US__2DB1C7EE" ManuallyRouted="false" />
-        <AssociationConnector Association="MiCanchaAppModel.FK__TURNOS__USUARIO___382F5661" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MiCanchaAppModel.TURNOS" Width="1.5" PointX="5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MiCanchaAppModel.USUARIO" Width="1.5" PointX="3.125" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="MiCanchaAppModel.FK__CANCHA__COMPLEJO__74444068" ManuallyRouted="false" />
+        <AssociationConnector Association="MiCanchaAppModel.FK__TURNOS__CANCHA_I__7814D14C" ManuallyRouted="false" />
+        <AssociationConnector Association="MiCanchaAppModel.FK__COMPLEJO__DUENIO__7167D3BD" ManuallyRouted="false" />
+        <AssociationConnector Association="MiCanchaAppModel.FK__USUARIO__TIPO_US__6E8B6712" ManuallyRouted="false" />
+        <AssociationConnector Association="MiCanchaAppModel.FK__TURNOS__USUARIO___7908F585" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

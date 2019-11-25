@@ -29,7 +29,6 @@ namespace MiCanchaAppServices.Controllers
                     oComplejo.DUENIO_ID = model.DUENIO_ID;
                     oComplejo.DIRECCION = model.DIRECCION;
                     oComplejo.TELEFONO_COMPLEJO = model.TELEFONO_COMPLEJO;
-                    oComplejo.EMAIL_COMPLEJO = model.EMAIL_COMPLEJO;
                     db.COMPLEJO.Add(oComplejo);
                     db.SaveChanges();
                 }
@@ -80,7 +79,6 @@ namespace MiCanchaAppServices.Controllers
                         result.DUENIO_ID = element.DUENIO_ID;
                         result.DIRECCION = element.DIRECCION;
                         result.TELEFONO_COMPLEJO = element.TELEFONO_COMPLEJO;
-                        result.EMAIL_COMPLEJO = element.EMAIL_COMPLEJO;
                     }
 
                 }
@@ -106,7 +104,6 @@ namespace MiCanchaAppServices.Controllers
                     result.DUENIO_ID = element.DUENIO_ID;
                     result.DIRECCION = element.DIRECCION;
                     result.TELEFONO_COMPLEJO = element.TELEFONO_COMPLEJO;
-                    result.EMAIL_COMPLEJO = element.EMAIL_COMPLEJO;
 
                     listResult.Add(result);
                 }
@@ -123,7 +120,7 @@ namespace MiCanchaAppServices.Controllers
             {
                 try
                 {
-                    var oComplejoModel = db.CANCHA.ToList().FirstOrDefault(c => c.ID == model.ID);
+                    var oComplejoModel = db.COMPLEJO.ToList().FirstOrDefault(c => c.ID == model.ID);
                     if (oComplejoModel == null)
                     {
                         var oComplejo = new Models.COMPLEJO();
@@ -131,13 +128,15 @@ namespace MiCanchaAppServices.Controllers
                         oComplejo.DUENIO_ID = model.DUENIO_ID;
                         oComplejo.DIRECCION = model.DIRECCION;
                         oComplejo.TELEFONO_COMPLEJO = model.TELEFONO_COMPLEJO;
-                        oComplejo.EMAIL_COMPLEJO = model.EMAIL_COMPLEJO;
                         db.COMPLEJO.Add(oComplejo);
 
                     }
                     else
                     {
                         oComplejoModel.NOMBRE = model.NOMBRE;
+                        oComplejoModel.DUENIO_ID = model.DUENIO_ID;
+                        oComplejoModel.DIRECCION = model.DIRECCION;
+                        oComplejoModel.TELEFONO_COMPLEJO = model.TELEFONO_COMPLEJO;
                     }
 
                     db.SaveChanges();
