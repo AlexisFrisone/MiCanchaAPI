@@ -134,7 +134,7 @@ namespace MiCanchaAppServices.Controllers
                     else
                     {
                         oComplejoModel.NOMBRE = model.NOMBRE;
-                        oComplejoModel.DUENIO_ID = model.DUENIO_ID;
+                        //oComplejoModel.DUENIO_ID = model.DUENIO_ID;
                         oComplejoModel.DIRECCION = model.DIRECCION;
                         oComplejoModel.TELEFONO_COMPLEJO = model.TELEFONO_COMPLEJO;
                     }
